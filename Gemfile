@@ -51,6 +51,8 @@ group :development do
 
   gem 'rubocop'
   gem 'rubocop-rails'
+  gem 'pry-byebug'
+  gem 'pry-rails'
 end
 
 group :test do
