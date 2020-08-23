@@ -21,6 +21,7 @@ module SelfStudySports
       g.assets false
       g.helper false
       g.test_framework false
+      g.template_engine :slim
     end
   end
 end
