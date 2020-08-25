@@ -1,0 +1,5 @@
+- if object.errors.any? #実行中のオブジェクトにエラーがあるかどうか
+  #error_messages.alert.alert-danger
+    ul.mb-0
+      - object.errors.full_messages.each do |msg| #全てのエラーメッセージを取り出してlistで表示
+        li = msg 
