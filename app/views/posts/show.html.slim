@@ -1,0 +1,46 @@
+.post-detail.card
+  .image-box
+    - @post.images.each do |image|
+      = image_tag image.url
+
+  .image-info-box
+    .profile-box.p-3
+      .d-flex.align-items-center
+        = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle mr-1'
+        = @post.user.username
+        / ログイン時かつ自身の投稿の場合は編集削除ができる分岐を導入する
+        - if logged_in? && @post.user_id == current_user.id
+          .ml-auto
+            = link_to post_path(@post), class: 'mr-3', method: :delete, data: {confirm: '本当に削除しますか？'} do
+              = icon 'far', 'trash-alt', class: 'fa-lg'
+            = link_to edit_post_path(@post) do
+              = icon 'far', 'edit', class: 'fa-lg'
+
+    hr.m-0
+    .post-body.p-3
+      / 投稿の本文
+      .row.no-gutters
+        .col-2
+          = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle'
+        .col-10
+          / railsのsimple_formatメソッドを使用し、入力時の改行等を反映できるようにする
+          = simple_format(@post.body)
+      hr
+      / コメント一覧
+      .row.no-gutters
+        .col-2
+          = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle'
+        .col-10
+          | ダミーコメントダミーコメントダミーコメント
+      hr
+      .row.no-gutters
+        .col-2
+          = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle'
+        .col-10
+          | ダミーコメントダミーコメントダミーコメント
+    hr.m-0
+    .post-comment.p-3
+      form.form-inline.mb-0
+        input type="text" class="form-control input-comment-body" placeholder="コメント"
+        button type="submit" class="btn btn-primary btn-raised"
+          | 投稿

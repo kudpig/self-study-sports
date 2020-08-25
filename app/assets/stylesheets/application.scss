@@ -19,3 +19,8 @@ body {
     width: 400px;
   }
 } 
+
+// _formで使用。画像の縦横比を維持せずにboxのサイズにトリミングし表示
+.image-thumbnail {
+  object-fit: cover;
+}
