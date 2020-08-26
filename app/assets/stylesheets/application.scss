@@ -26,6 +26,9 @@ img {
     left: 50%;
     transform: translate(-50%, -50%);
     width: 400px;
+    @media screen and (max-width: 767px) {
+      width: 100%;
+    }
   }
 } 
 
@@ -70,6 +73,9 @@ img {
   .image-box {
     width: 400px;
     height: 400px;
+    @media screen and (max-width: 767px) {
+      width: 100%;
+    }
     img {
       // image-boxに画像のサイズを合わせないと、大きかった時にはみ出る
       object-fit: cover;
@@ -84,6 +90,9 @@ img {
     display: flex;
     flex-direction: column;
     // colum型とし、コメント等を縦に配置
+    @media screen and (max-width: 767px) {
+      width: 100%;
+    }
   
     .post-body {
       overflow: scroll;
