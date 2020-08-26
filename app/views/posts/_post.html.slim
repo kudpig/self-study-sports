@@ -1,4 +1,5 @@
 .card.mb-5.post
+  / mb-5でcardごとに下側のmarginを付与している
   .card-header
     .d-flex.align-items-center
       = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle mr-1'
@@ -13,9 +14,14 @@
             = icon 'far', 'edit', class: 'fa-lg'
 
   = link_to post_path(post) do
-    / 変数postにある配列imagesを一つずつ取り出す
-    - post.images.each do |image|
-      = image_tag image.url, class: 'card-img-top'
+    / swiperの公式ページ見本に沿って記述
+    .swiper-container
+      .swiper-wrapper
+        / 変数postにある配列imagesを一つずつ取り出す
+        - post.images.each do |image|
+          .swiper-slide
+            = image_tag image.url, class: 'card-img-top'
+      .swiper-pagination
 
   .card-body
     .card-text
