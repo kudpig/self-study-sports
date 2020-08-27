@@ -38,7 +38,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   # For images you might use something like this:
   # アップロード許可判定をするメソッド。記載の拡張子のファイルのみ許可される。
   def extension_whitelist
-    %w(jpg jpeg gif png)
+    %w[jpg jpeg gif png]
   end
 
   # Override the filename of the uploaded files:
