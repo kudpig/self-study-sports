@@ -1,4 +1,6 @@
 class CommentsController < ApplicationController
+  before_action :require_login, only: %i[create edit update destroy]
+  # ログイン時のみ許可
 
   def create
     @comment = current_user.comments.create(comment_params)
@@ -16,6 +18,7 @@ class CommentsController < ApplicationController
     @comment.update(comment_update_params)
   end
 
+  # updateはshallowの対象
   def destroy
     @comment = current_user.comments.find(params[:id])
     @comment.destroy
