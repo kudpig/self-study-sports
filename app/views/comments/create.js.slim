@@ -1,0 +1,10 @@
+/ 保存出来なかった場合にアラートを出す
+- if @comment.errors.present?
+  | alert("#{@comment.errors.full_messages.join('\n')}");
+- else
+  | $('.comments-box').prepend("#{j render('comments/comment', comment: @comment)}");
+  | $('.input-comment-body').val('');
+  / jsのprependメソッドを使い要素内の先頭にテキストを追加する。[対象要素.prepned(追加したい文字列)]
+  / ruby部分の「j render〜〜」のjは、RailsActionView::Helperのescape_javascriptメソッド。
+  / rubyで書いた構文をjs形式へ変換してくれる。
+  / jsのvalメソッドを使用しテキストフィールドの部分を空にする。要素の中身を''で囲ったものに変更している。

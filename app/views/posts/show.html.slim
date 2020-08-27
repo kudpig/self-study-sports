@@ -32,9 +32,12 @@
       hr
       / コメント一覧
       = render 'comments/comments', comments: @comments
+
     hr.m-0
     .post-comment.p-3
-      form.form-inline.mb-0
-        input type="text" class="form-control input-comment-body" placeholder="コメント"
-        button type="submit" class="btn btn-primary btn-raised"
-          | 投稿
+      / 新規コメント投稿フォーム
+      = form_with model: [@post, @comment], class: 'd-flex mb-0 flex-nowrap justify-content-between', remote: true do |f|
+        = f.text_field :body, class: 'form-control input-comment-body', placeholder: 'コメント'
+        = f.submit '投稿', class: 'btn btn-primary btn-raised'
+        / modelを[@post, @comment]と指定することで、formの送信先がcommentコントローラーのcreateアクションとなる(showページ内の場合)
+        / remote: true という記述はjs形式でリクエストを送信するためのもの。非同期対応

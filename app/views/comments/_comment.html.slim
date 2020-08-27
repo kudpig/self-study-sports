@@ -13,5 +13,6 @@ div id="comment-#{comment.id}"
           = icon 'far', 'trash-alt', class: 'fa-sm'
         = link_to edit_comment_path(comment), remote: true do
           = icon 'far', 'edit', class: 'fa-sm'
-          / remote: true という記述はjs形式でリクエストを送信するためのもの。非同期対応
+          / remote: true という記述はjs形式でリクエストを送信するためのもの。非同期化のため
+          / 対応するjsファイルを探しにいく
   hr
