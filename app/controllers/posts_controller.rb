@@ -42,6 +42,9 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    @comments = @post.comments.includes(:user).order(created_at: :desc)
+    # 投稿詳細ページでコメントを表示させるための記述。@postに紐づくコメントを@commentに入れる
+    # 一覧ページと同じで、N+1対策と並び順
   end
 
   def destroy
