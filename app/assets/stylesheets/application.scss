@@ -1,10 +1,19 @@
 @import 'bootstrap-material-design/dist/css/bootstrap-material-design';
+@import 'swiper/swiper-bundle';
 @import 'font-awesome-sprockets';
 @import 'font-awesome';
 
 body {
   position: relative;
   height: 100vh;
+}
+
+main {
+  padding-top: 50px;
+}
+
+img {
+  max-width: 100%;
 }
 
 .login-register-form {
@@ -17,5 +26,84 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     width: 400px;
+    @media screen and (max-width: 767px) {
+      width: 100%;
+    }
   }
 } 
+
+.swiper-container {
+  width: 100%;
+}
+
+// _post以下のcardに"post"クラスが与えられている。
+// 一つ一つの投稿そのもののサイズを決定している
+.post {
+  max-width: 400px;
+  margin: 0 auto;
+  // 一つ目の画像のサイズを決定（横幅postに合わせ、縦もそれに準じる）
+  // 正方形にしたい
+  .card-img-top {
+    width: 400px;
+    height: 400px;
+    // 画像の縦横比を維持せずにboxのサイズにトリミングし表示
+    object-fit: cover;
+  }
+}
+
+// _formで使用。画像の縦横比を維持せずにboxのサイズにトリミングし表示
+.image-thumbnail {
+  object-fit: cover;
+}
+
+
+// showページの装飾
+.post-detail {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  &.card {
+    flex-direction: row;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  // 画像の枠
+  .image-box {
+    width: 400px;
+    height: 400px;
+    @media screen and (max-width: 767px) {
+      width: 100%;
+    }
+    img {
+      // image-boxに画像のサイズを合わせないと、大きかった時にはみ出る
+      object-fit: cover;
+      width: 400px;
+      height: 400px;
+    }
+  }
+
+  // 投稿者＆コメント部分
+  .image-info-box {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    // colum型とし、コメント等を縦に配置
+    @media screen and (max-width: 767px) {
+      width: 100%;
+    }
+  
+    .post-body {
+      overflow: scroll;
+      max-height: 250px;
+      // コメントが多量となった場合はスクロール
+    }
+    .post-comment {
+      margin-top: auto;
+      .input-comment-body {
+        flex: 1;
+      }
+    }
+  }
+}

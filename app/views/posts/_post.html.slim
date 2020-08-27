@@ -1,0 +1,28 @@
+.card.mb-5.post
+  / mb-5でcardごとに下側のmarginを付与している
+  .card-header
+    .d-flex.align-items-center
+      = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle mr-1'
+      = post.user.username
+
+      / ログイン時かつ自身の投稿の場合は編集削除ができる分岐を導入する
+      - if logged_in? && post.user_id == current_user.id
+        .ml-auto
+          = link_to post_path(post), class: 'mr-3', method: :delete, data: { confirm: '本当に削除しますか？' } do
+            = icon 'far', 'trash-alt', class: 'fa-lg'
+          = link_to edit_post_path(post) do
+            = icon 'far', 'edit', class: 'fa-lg'
+
+  = link_to post_path(post) do
+    / swiperの公式ページ見本に沿って記述
+    .swiper-container
+      .swiper-wrapper
+        / 変数postにある配列imagesを一つずつ取り出す
+        - post.images.each do |image|
+          .swiper-slide
+            = image_tag image.url, class: 'card-img-top'
+      .swiper-pagination
+
+  .card-body
+    .card-text
+      = post.body
