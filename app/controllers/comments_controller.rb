@@ -27,8 +27,9 @@ class CommentsController < ApplicationController
   private
   
   def comment_params
-    params.require(:comment).permit(:body).merge(user_id: current_user.id, post_id: params[:post_id])
-    # user_idとpost_idをcommentに紐づけて保存出来るようにする
+    params.require(:comment).permit(:body).merge(post_id: params[:post_id])
+    # post_idをcommentに紐づけて保存出来るようにする
+    # user_idについてはcurrent_user.comments.create(comment_params)で取得できている
   end
 
   def comment_update_params

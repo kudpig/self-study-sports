@@ -33,11 +33,17 @@
       / コメント一覧
       = render 'comments/comments', comments: @comments
 
-    hr.m-0
-    .post-comment.p-3
-      / 新規コメント投稿フォーム
-      = form_with model: [@post, @comment], class: 'd-flex mb-0 flex-nowrap justify-content-between', remote: true do |f|
-        = f.text_field :body, class: 'form-control input-comment-body', placeholder: 'コメント'
-        = f.submit '投稿', class: 'btn btn-primary btn-raised'
-        / modelを[@post, @comment]と指定することで、formの送信先がcommentコントローラーのcreateアクションとなる(showページ内の場合)
-        / remote: true という記述はjs形式でリクエストを送信するためのもの。非同期対応
+    - if logged_in?
+      / 非ログイン時にフォーム非表示。
+      hr.m-0
+      .post-comment.p-3
+        / 新規コメント投稿フォーム
+        = form_with model: [@post, @comment], class: 'd-flex mb-0 flex-nowrap justify-content-between', remote: true do |f|
+          = f.text_field :body, class: 'form-control input-comment-body', placeholder: 'コメント'
+          = f.submit '投稿', class: 'btn btn-primary btn-raised'
+          / modelを[@post, @comment]と指定することで、formの送信先がcommentコントローラーのcreateアクションとなる(showページ内の場合)
+          / remote: true という記述はjs形式でリクエストを送信するためのもの。非同期対応
+    - else
+      / 非ログイン時にはフォームの代わりに以下の案内を表示
+      .post-comment.p-3
+        | ※コメント投稿にはログインが必要です
