@@ -11,6 +11,10 @@ class Post < ApplicationRecord
   # postは１つのuserを持つ、というアソシエーション
   # この記載がないと、参照先(この場合はuser)テーブルにアクセスできない
 
+  has_many :comments, dependent: :destroy
+  # postは複数のcommentを持つ
+  # dependent: :destroyについてはuserモデルに記述済
+
   validates :body, presence: true, length: { maximum: 255 }
   validates :images, presence: true
   # migrationファイルでnullfalseをつけたものはこちらでもバリデーションをつける。

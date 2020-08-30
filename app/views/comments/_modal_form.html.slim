@@ -1,0 +1,15 @@
+.modal#comment-edit-modal
+  .modal-dialog
+    .modal-content
+      .modal-header
+        h5.modal-title コメント編集
+        button.close aria-label="Close" data-dismiss="modal" type="button"
+          span aria-hidden="true"  ×
+
+      / 以下モーダルのフォーム部分
+      .modal-body
+        = form_with model: comment, class: 'd-flex mb-0 flex-nowrap justify-content-between', remote: true do |f|
+          = f.text_field :body, class: 'form-control input-comment-body', placeholder: 'コメント'
+          = f.submit '投稿', class: 'btn btn-primary btn-raised'
+      / showページ内のコメント新規登録フォームとさほど変わらず。
+      / shallowオプションが適用されているので、postモデルを経由する必要はない

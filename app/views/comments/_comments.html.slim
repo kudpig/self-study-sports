@@ -1,0 +1,9 @@
+.comments-box
+  = render comments
+
+/ 投稿(post)のshowページから@commentsを受け取っている。
+/ 受け取った@commentsをさらに"comments"として部分テンプレート先へ渡している
+/ 以下の省略記法となる
+/ render partial: 'comment', collection: comments ⇦実態は@commentsが入っているというイメージ
+/ すなわち部分テンプレート先は"_comment.html.slim"となり、
+/ 部分テンプレート内で使う変数は、commentsから取り出し"comment"として扱う。

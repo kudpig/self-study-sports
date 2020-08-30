@@ -1,0 +1,18 @@
+div id="comment-#{comment.id}"
+  .row.no-gutters
+    .col-2
+      = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle'
+    .col-9
+      span.font-weight-bold.pr-1
+        = comment.user.username
+      = comment.body
+    .col-1
+      / ログイン時かつ自身の投稿の場合は編集削除ができる分岐を導入する
+      - if logged_in? && comment.user_id == current_user.id
+        = link_to comment_path(comment), class: 'mr-3', method: :delete, data: {confirm: '本当に削除しますか？'}, remote: true do
+          = icon 'far', 'trash-alt', class: 'fa-sm'
+        = link_to edit_comment_path(comment), remote: true do
+          = icon 'far', 'edit', class: 'fa-sm'
+          / remote: true という記述はjs形式でリクエストを送信するためのもの。非同期化のため
+          / 対応するjsファイルを探しにいく
+  hr

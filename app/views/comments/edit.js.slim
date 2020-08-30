@@ -1,0 +1,6 @@
+| $("#modal-container").html("#{j (render 'modal_form', comment: @comment)}");
+| $("#comment-edit-modal").modal('show');
+
+/ 1行目で、comments/_modal_formのファイルを"#modal-container"にhtml形式で挿入している。
+/ 2行目で、jsのmodalメソッドを使用し、"#comment-edit-modal"以下をmodalとして表示。
+/ modal('show')でmodalを開くことが出来る。

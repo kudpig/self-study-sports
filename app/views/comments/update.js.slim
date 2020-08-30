@@ -1,0 +1,8 @@
+/ 更新出来なかった場合にアラートを出す
+- if @comment.errors.present?
+  | alert("#{@comment.errors.full_messages.join('\n')}");
+- else
+  | $("#comment-#{@comment.id}").html("#{j render('comments/comment', comment: @comment)}");
+  | $("#comment-edit-modal").modal('hide');
+/ 対象のcomment_idの内容を更新したものに差し替える(htmlメソッドで文字列を上書きするイメージ)
+/ 更新が終わったのでmodal('hide')でedit.js.slimにて開いたモーダルを閉じる処理を行う

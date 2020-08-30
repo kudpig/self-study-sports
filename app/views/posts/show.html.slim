@@ -31,20 +31,19 @@
           = simple_format(@post.body)
       hr
       / コメント一覧
-      .row.no-gutters
-        .col-2
-          = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle'
-        .col-10
-          | ダミーコメントダミーコメントダミーコメント
-      hr
-      .row.no-gutters
-        .col-2
-          = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle'
-        .col-10
-          | ダミーコメントダミーコメントダミーコメント
-    hr.m-0
-    .post-comment.p-3
-      form.form-inline.mb-0
-        input type="text" class="form-control input-comment-body" placeholder="コメント"
-        button type="submit" class="btn btn-primary btn-raised"
-          | 投稿
+      = render 'comments/comments', comments: @comments
+
+    - if logged_in?
+      / 非ログイン時にフォーム非表示。
+      hr.m-0
+      .post-comment.p-3
+        / 新規コメント投稿フォーム
+        = form_with model: [@post, @comment], class: 'd-flex mb-0 flex-nowrap justify-content-between', remote: true do |f|
+          = f.text_field :body, class: 'form-control input-comment-body', placeholder: 'コメント'
+          = f.submit '投稿', class: 'btn btn-primary btn-raised'
+          / modelを[@post, @comment]と指定することで、formの送信先がcommentコントローラーのcreateアクションとなる(showページ内の場合)
+          / remote: true という記述はjs形式でリクエストを送信するためのもの。非同期対応
+    - else
+      / 非ログイン時にはフォームの代わりに以下の案内を表示
+      .post-comment.p-3
+        | ※コメント投稿にはログインが必要です
