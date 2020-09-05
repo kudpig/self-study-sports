@@ -34,7 +34,7 @@ class User < ApplicationRecord
 
   def like?(post)
     like_posts.include?(post)
-    # current_userが持つ"like_posts"にコントローラーより受け取った"postオブジェクト"が格納されているかどうかを確認する。
+    # current_userが持つ"like_posts"にview(_like_area)より受け取った"postオブジェクト"が格納されているかどうかを確認する。
     # 配列current_userが、postと等しい要素を持つ時にtrue、持たない時にfalseを返す。
   end
 
