@@ -1,0 +1,7 @@
+= link_to likes_path(post_id: post.id), method: :post, remote: true do
+  = icon 'far', 'heart', class: 'fa-lg'
+
+/ like_areaにていいねされていないの投稿である場合の表示。
+/ 色が塗られていないハートが表示されていて、ボタンを押すといいねをする(post)という処理をリクエストする。
+/ コントローラーに"どの投稿にいいねしたのか"という情報を渡せるように"link_to likes_path(post_id: post.id)"と記述している。
+/ このように記述すると、/likes?post_id=1 のようにクエリとして渡してあげるできる。

@@ -20,6 +20,11 @@
             = link_to edit_post_path(@post) do
               = icon 'far', 'edit', class: 'fa-lg'
 
+        / ログイン時かつ自身の投稿でない場合は"いいね"ができる分岐を導入する
+        - if logged_in? && @post.user_id != current_user.id
+          .ml-auto
+            = render 'like_area', post: @post
+
     hr.m-0
     .post-body.p-3
       / 投稿の本文
