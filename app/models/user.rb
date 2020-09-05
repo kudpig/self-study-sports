@@ -21,6 +21,23 @@ class User < ApplicationRecord
   # 「userがいいねしたpostを取得したい」ということであれば、"has_many :posts, through: :likes"でも良いように一見考えられるが、
   # userとpostの間には既にアソシエーションが組まれており、そこに新たな関係性を追加することはできないためlike_postsという項目を設定する必要がある。
 
+  def like(post)
+    like_posts << post
+    # current_userが持つ"like_posts"を配列形式とし、コントローラーより受け取った"postオブジェクト(いいねしようとしている投稿)"を
+    # いいねするたびに格納していくという処理。
+  end
+
+  def unlike(post)
+    like_posts.destroy(post)
+    # current_userが持つ"like_posts"に格納されているpost(コントローラーから受け取ったpost)を削除する。
+  end
+
+  def like?(post)
+    like_posts.include?(post)
+    # current_userが持つ"like_posts"にコントローラーより受け取った"postオブジェクト"が格納されているかどうかを確認する。
+    # 配列current_userが、postと等しい要素を持つ時にtrue、持たない時にfalseを返す。
+  end
+
   validates :password, length: { minimum: 3 }, if: -> { new_record? || changes[:crypted_password] }
   validates :password, confirmation: true, if: -> { new_record? || changes[:crypted_password] }
   validates :password_confirmation, presence: true, if: -> { new_record? || changes[:crypted_password] }
