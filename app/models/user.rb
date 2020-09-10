@@ -76,6 +76,16 @@ class User < ApplicationRecord
     # 配列followingが、userと等しい要素を持つ時にtrue、持たない時にfalseを返す。
   end
 
+  def feed
+    Post.where(user_id: following_ids << id)
+    # postの中から、post.user_idが条件に一致するものを探す。
+    # whereは条件に合うレコードを全て返す処理を行う。
+    # whereの中身はハッシュである。キー：user_id、値：following_ids << id
+    # 値：following_ids << id ≒ self.following_ids.push(self.id)
+    # 要するに、自身の持つfollowing_idsに、自分のuser.idを加えたもの。
+    # following_idsは、ActiveRecordのcollection_singular_idsメソッド。Railsガイド4.3.1.7参照
+  end
+
   scope :recent, ->(count) { order(created_at: :desc).limit(count) }
   # 作成順での並び替え。(count)で数字を引数として受け取れる。
 

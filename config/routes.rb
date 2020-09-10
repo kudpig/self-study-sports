@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root to: 'posts#index'
 
-  resources :users, only: %i[new create]
+  resources :users, only: %i[index new create show]
   resources :posts do
     resources :comments, shallow: true
   end

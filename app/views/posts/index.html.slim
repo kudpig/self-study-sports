@@ -4,7 +4,12 @@
       / @postsに入っているデータ分、render以下の表示を繰り返す
       / pertialとcollectionを省略した記法
       / 部分テンプレート先には@posts→変数postとして代入される
-      = render @posts
+      / postの有無で分岐
+      - if @posts.present?
+        = render @posts
+      - else
+        .text-center.font-weight-bold
+          | 投稿がありません
       = paginate @posts
 
     / 画面右側はユーザー情報を載せる記述
@@ -22,4 +27,4 @@
           .card-body
             = render @users
           .card-footer
-            = link_to 'すべて見る', '#'
+            = link_to 'すべて見る', users_path
