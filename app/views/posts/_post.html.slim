@@ -2,8 +2,9 @@
   / mb-5でcardごとに下側のmarginを付与している
   .card-header
     .d-flex.align-items-center
-      = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle mr-1'
-      = post.user.username
+      = link_to user_path(post.user) do
+        = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle mr-1'
+        = post.user.username
 
       / ログイン時かつ自身の投稿の場合は編集削除ができる分岐を導入する
       - if logged_in? && post.user_id == current_user.id

@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root to: 'posts#index'
 
-  resources :users, only: %i[new create]
+  resources :users, only: %i[index new create show]
   resources :posts do
     resources :comments, shallow: true
   end
@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   # (urlを短くしても一意性を確保出来ている)
 
   resources :likes, only: %i[create destroy]
+  resources :relationships, only: %i[create destroy]
 
   get 'login', to: 'user_sessions#new'
   post 'login', to: 'user_sessions#create'
