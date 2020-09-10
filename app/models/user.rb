@@ -59,6 +59,17 @@ class User < ApplicationRecord
     # 配列like_postsが、postと等しい要素を持つ時にtrue、持たない時にfalseを返す。
   end
 
+  def follow(other_user)
+    following << other_user
+    # current_userが持つ"following"を配列形式とし、コントローラーより受け取った"other_userオブジェクト(@userのこと)"を
+    # フォローするたびに格納していくという処理。
+  end
+
+  def unfollow(other_user)
+    following.destroy(other_user)
+    # current_userが持つ"following"に格納されているother_user(コントローラーから受け取った@user)を削除する。
+  end
+
   validates :password, length: { minimum: 3 }, if: -> { new_record? || changes[:crypted_password] }
   validates :password, confirmation: true, if: -> { new_record? || changes[:crypted_password] }
   validates :password_confirmation, presence: true, if: -> { new_record? || changes[:crypted_password] }
