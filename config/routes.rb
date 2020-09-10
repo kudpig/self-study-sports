@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   # (urlを短くしても一意性を確保出来ている)
 
   resources :likes, only: %i[create destroy]
+  resources :relationships, only: %i[create destroy]
 
   get 'login', to: 'user_sessions#new'
   post 'login', to: 'user_sessions#create'
