@@ -1,0 +1,10 @@
+- if logged_in? && current_user.id != user.id
+  / ログインしている かつ 表示しているユーザーがログインしているユーザーではない場合、以下を表示
+  div id="follow-area-#{user.id}"
+    - if current_user.following?(user)
+      = render 'users/unfollow', user: user
+    - else
+      = render 'users/follow', user: user
+
+/ user.rbにて設定しているfollowing?メソッドを実行している。戻り値はtrue/false
+/ posts/index → users/_user から@userをuserとして受け取っている

@@ -1,0 +1,6 @@
+= link_to relationships_path(followed_id: user.id), class: 'btn btn-raised btn-outline-warning', method: :post, remote: true do
+  | フォロー
+
+/ フォローをするというリンクになるので、relationshipsコントローラーのcreateアクションにデータを送ってあげる必要がある。
+/ コントローラーcreateでは、"@user = User.find(params[:followed_id])"と記述している。つまり、今クリックしようとしているuserのidが分かれば良い。
+/ なので現在持っている@userのidをfollowed_idとして渡してあげる。
