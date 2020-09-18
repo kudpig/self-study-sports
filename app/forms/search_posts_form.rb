@@ -10,18 +10,17 @@ class SearchPostsForm
   # 型の指定をしている。
   # キーがbodyのものはstring型となる。
 
+  # posts_controllerのsearchアクションで実行される。
+  # (application_controllerで定義した@search_formに対して)
   def search
-    # posts_controllerのsearchアクションで実行される。
-    # (application_controllerで定義した@search_formに対して)
     scope = Post.distinct
-    # 重複を除外している。
     if body.present?
-      scope = scope.body_contain(body)
-      # body_containはposts.rbに記載。検索ロジック。
+      scope.body_contain(body)
+      # 検索ロジックを実行。post.rbに記述。
     else
       scope
+      # "if body.present?"がfalseだった場合にscopeを返す
+      # つまり検索が空の場合はPost.distinctの結果のみ返すということ。
     end
-    # "if body.present?"がfalseだった場合にscopeを返す
-    # つまり検索が空の場合はPost.distinctの結果のみ返すということ。
   end
 end

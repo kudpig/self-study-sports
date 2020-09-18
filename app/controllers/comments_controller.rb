@@ -25,7 +25,7 @@ class CommentsController < ApplicationController
   end
 
   private
-  
+
   def comment_params
     params.require(:comment).permit(:body).merge(post_id: params[:post_id])
     # post_idをcommentに紐づけて保存出来るようにする
