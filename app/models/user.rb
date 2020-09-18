@@ -22,8 +22,6 @@ class User < ApplicationRecord
   # 「userがいいねしたpostを取得したい」ということであれば、"has_many :posts, through: :likes"でも良いように一見考えられるが、
   # userとpostの間には既にアソシエーションが組まれており、そこに新たな関係性を追加することはできないためlike_postsという項目を設定する必要がある。
 
-
-
   # 【フォロー機能に関するアソシエーション】
   # userとrelationshipについてアソシエーションを組む必要がある。簡潔に"has_many :relationships"としたい所だが、
   # relationshipテーブルに２つあるカラムはどちらもuserテーブルに紐づく中間テーブルとなっており、どちらのカラムとのアソシエーションなのかをしっかり区別してあげる必要がある。
@@ -33,7 +31,7 @@ class User < ApplicationRecord
   # active_relationshipsと命名しているため、class_nameでテーブル名を明示。かつforeign_key設定により参照するカラムも指定。
   has_many :passive_relationships, class_name: 'Relationship', foreign_key: 'followed_id', dependent: :destroy
   # 上と同じ。
-  
+
   # ActiveRecordの関連付け。correctionを取得する。
   has_many :following, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
@@ -41,7 +39,6 @@ class User < ApplicationRecord
   # 上記で設定した"〜〜〜_relationships"を経由し、sourceを持つuserを関連付ける。
   # user.followingを実行する→→"active_relationships"を経由する(userは自身のidを元にRelationテーブル/follower_idを参照)→→sourceオプションにより、idが一致したレコードのデータを取得できる
   # 要は関連付けされたコレクションを取得できるよってこと。
-  
 
   # 【いいね機能に関するメソッド】
   # 主にhas_many関連付けをしたコレクションメソッド"like_posts"を使用する。"self"は省略されている。

@@ -16,5 +16,4 @@ class RelationshipsController < ApplicationController
     current_user.unfollow(@user)
     # userモデルで設定したメソッドを実行している。
   end
-
 end

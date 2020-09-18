@@ -20,6 +20,11 @@ class Post < ApplicationRecord
   has_many :like_users, through: :likes, source: :user
   # 内容についてはuser.rbと重複するので割愛
 
+  scope :body_contain, ->(word) { where('body LIKE ?', "%#{word}%") }
+  # 検索のロジックを記述。検索フォームに入力されたものを第2引数である、"->(word) { where('body LIKE ?', "%#{word}%") }" を実行し、値を返す。
+  # （SearchPostsFormインスタンスのself.bodyを受け取っている）
+  # プレースホルダーを用い、SQLインジェクションを回避。
+
   validates :body, presence: true, length: { maximum: 255 }
   validates :images, presence: true
   # migrationファイルでnullfalseをつけたものはこちらでもバリデーションをつける。

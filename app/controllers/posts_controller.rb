@@ -8,12 +8,12 @@ class PostsController < ApplicationController
     # .page(params[:page])により現在のページパラメーターを受け取っている
     # kaminariのデフォルト設定により最初のページはparamsを無視する（config.params_on_first_page = false）
     @posts = if current_user
-              # ログイン中であれば、ログインしているユーザーがフォローしている人の投稿のみ表示される分岐
-              current_user.feed.includes(:user).page(params[:page]).order(created_at: :desc)
-              # feedはuser.rbにて設定。フォロー済ユーザー+自分のPostを取り出すメソッド。
+               # ログイン中であれば、ログインしているユーザーがフォローしている人の投稿のみ表示される分岐
+               current_user.feed.includes(:user).page(params[:page]).order(created_at: :desc)
+             # feedはuser.rbにて設定。フォロー済ユーザー+自分のPostを取り出すメソッド。
              else
-              Post.all.includes(:user).page(params[:page]).order(created_at: :desc)
-              # 非ログイン時は全ての投稿を表示。
+               Post.all.includes(:user).page(params[:page]).order(created_at: :desc)
+               # 非ログイン時は全ての投稿を表示。
              end
     @users = User.recent(5)
   end
@@ -67,6 +67,12 @@ class PostsController < ApplicationController
       flash.now[:danger] = '投稿の削除に失敗しました'
       redirect_back(fallback_location: root_path)
     end
+  end
+
+  def search
+    @posts = @search_form.search.includes(:user).page(params[:page])
+    # application_controllerで定義した@search_formについて検索をかける。
+    # includes(:user)はN+1問題対応。検索はPostについてだが、それに紐づくUserについてもSQLが発行されてしまう。
   end
 
   private
