@@ -69,6 +69,12 @@ class PostsController < ApplicationController
     end
   end
 
+  def search
+    @posts = @search_form.search.includes(:user).page(params[:page])
+    # application_controllerで定義した@search_formについて検索をかける。
+    # includes(:user)はN+1問題対応。検索はPostについてだが、それに紐づくUserについてもSQLが発行されてしまう。
+  end
+
   private
 
   def post_params
