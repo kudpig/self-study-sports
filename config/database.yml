@@ -19,14 +19,14 @@ default: &default
 
 development:
   <<: *default
-  database: self-study-sports_development
+  database: flipgram_development
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: self-study-sports_test
+  database: flipgram_test
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -49,6 +49,6 @@ test:
 #
 production:
   <<: *default
-  database: self-study-sports_production
-  username: self-study-sports
-  password: <%= ENV['SELF-STUDY-SPORTS_DATABASE_PASSWORD'] %>
+  database: flipgram_production
+  username: flipgram
+  password: <%= ENV['FRIPGRAM_DATABASE_PASSWORD'] %>
