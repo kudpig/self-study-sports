@@ -49,6 +49,6 @@ test:
 #
 production:
   <<: *default
-  database: self-study-sports_production
-  username: self-study-sports
-  password: <%= ENV['SELF-STUDY-SPORTS_DATABASE_PASSWORD'] %>
+  database: flipgram_production
+  username: flipgram
+  password: <%= ENV['FRIPGRAM_DATABASE_PASSWORD'] %>
