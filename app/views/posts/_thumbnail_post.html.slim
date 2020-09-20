@@ -1,0 +1,4 @@
+.col-md-4.mb-3
+  = link_to post_path(thumbnail_post), class: 'thumbs' do
+    = image_tag thumbnail_post.images.first.url
+/ users/showからthumbnail_post(user.postのこと)を受け取っている。
