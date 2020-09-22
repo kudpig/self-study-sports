@@ -1,0 +1,15 @@
+= form_with model: @user, url: mypage_account_path, method: :patch, local: true do |f|
+  / method: :patchとすることで、情報の送信先がeditアクションとなる。
+  = render 'shared/error_messages', object: f.object
+  .form-group
+    = f.label :avatar
+    = f.file_field :avatar, onchange: 'previewFileWithId(preview)', class: 'form-control', accept: 'image/*'
+    / file_fieldがonchange(選択された)した時に、'previewFileWithId'が実行される。'preview'というidを元に操作するDOMを取得。
+    = f.hidden_field :avatar_cache
+    = image_tag @user.avatar.url, class: 'rounded-circle', id: 'preview', size: '100x100'
+    / onchangeイベントによって、'preview'というidを持っているimage_tagの画像url(src)が上書きされる。
+  .form-group
+    = f.label :username
+    = f.text_field :username, class: 'form-control'
+
+  = f.submit class: 'btn btn-primary btn-raised'

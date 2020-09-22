@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   authenticates_with_sorcery!
 
+  mount_uploader :avatar, AvatarUploader
+
   has_many :posts, dependent: :destroy
   # userは複数のpostを持つというアソシエーション
   # userとpost両方ともアソシエーションを記入する必要がある
