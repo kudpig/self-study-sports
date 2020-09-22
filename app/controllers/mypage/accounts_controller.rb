@@ -10,7 +10,7 @@ class Mypage::AccountsController < Mypage::BaseController
     # ログイン中のユーザーを@userとする
     if @user.update(account_params)
       # @userをaccount_paramsの内容で上書きする
-      redirect_to edit_mypage_account_path, success: 'プロフィールを更新しました'
+      redirect_to user_path(current_user), success: 'プロフィールを更新しました'
     else
       flash.now[:danger] = 'プロフィールの更新に失敗しました'
       render :edit
