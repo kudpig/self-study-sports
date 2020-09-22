@@ -3,7 +3,7 @@
   .card-header
     .d-flex.align-items-center
       = link_to user_path(post.user) do
-        = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle mr-1'
+        = image_tag post.user.avatar.url, size: '40x40', class: 'rounded-circle mr-1'
         = post.user.username
 
       / ログイン時かつ自身の投稿の場合は編集削除ができる分岐を導入する

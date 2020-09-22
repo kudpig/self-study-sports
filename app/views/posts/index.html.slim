@@ -17,7 +17,7 @@
       / ログインがtrueならば表示。logged_in?はsoceryのメソッド。
       - if logged_in?
         .profile-box.mb-3
-          = image_tag 'profile-placeholder.png', size: '50x50', class: 'rounded-circle mr-1'
+          = image_tag current_user.avatar.url, size: '50x50', class: 'rounded-circle mr-1'
           = current_user.username
 
       .users-box
