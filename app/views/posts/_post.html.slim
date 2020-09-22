@@ -23,10 +23,10 @@
     / swiperの公式ページ見本に沿って記述
     .swiper-container
       .swiper-wrapper
-        / 変数postにある配列imagesを一つずつ取り出す
-        - post.images.each do |image|
-          .swiper-slide
-            = image_tag image.url, class: 'card-img-top'
+        / / 変数postにある配列imagesを一つずつ取り出す
+        / - post.images.each do |image|
+        .swiper-slide
+          = image_tag post.image.url, class: 'card-img-top'
       .swiper-pagination
 
   .card-body

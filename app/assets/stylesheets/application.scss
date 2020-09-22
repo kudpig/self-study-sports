@@ -51,9 +51,13 @@ img {
   }
 }
 
-// _formで使用。画像の縦横比を維持せずにboxのサイズにトリミングし表示
+// _formで使用。(新規投稿/編集)画像の縦横比を維持せずにboxのサイズにトリミングし表示
+// 画像をブロック要素にして中央寄せしている
 .image-thumbnail {
   object-fit: cover;
+  display: block;
+  margin: auto;
+  border: 1px solid;
 }
 
 

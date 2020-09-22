@@ -1,8 +1,8 @@
 class CreatePosts < ActiveRecord::Migration[5.2]
   def change
     create_table :posts do |t|
-      t.string :images, null: false
-      # 画像は複数登録なのでimagesにしている。
+      t.string :image, null: false
+      # 画像は一枚のみ可とした。
       t.text :body, null: false
       t.references :user, foreign_key: true
       # foreign_keyはどのカラムにキー制約をつけるのか、という設定をすることが出来る。
