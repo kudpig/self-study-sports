@@ -35,7 +35,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
   def extension_whitelist
-    %w(jpg jpeg gif png)
+    %w[jpg jpeg gif png]
   end
 
   # Override the filename of the uploaded files:
@@ -43,7 +43,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
   # def filename
   #   "something.jpg" if original_filename
   # end
-  
+
   # 画像の横幅・縦幅の最大値設定。どちらかが超えてしまう場合は最大値に合わせてリサイズされる。
   process resize_to_limit: [400, 400]
 end
