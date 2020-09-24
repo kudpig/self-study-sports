@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root to: 'posts#index'
+  root to: 'top#index'
 
   resources :users, only: %i[index new create show]
   resources :posts do
