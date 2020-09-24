@@ -1,0 +1,9 @@
+= link_to relationship_path(current_user.active_relationships.find_by(followed_id: user.id)), class: 'btn btn-warning btn-raised', method: :delete, remote: true do
+  | アンフォロー
+
+/ フォローを外すというリンクになるので、relationshipsコントローラーのdestroyアクションにデータを送ってあげる必要がある。
+/ コントローラーdestoryでは、"@user = Relationship.find(params[:id]).followed"と記述している。
+/ 上記を満たすために、コントローラー側ではRelationshipテーブルで現在削除しようとしているレコードの情報(params)が必要となる。
+/ よって、/relationships?id=○○のような形で渡してあげたい（クエリの知識が浅く、果たして合っているか怪しい・・・）
+/ 次のようにクエリが実行される。→→active_relationshipsは自身のidを元にRelationテーブル/follower_idを参照。
+/ →→さらにfindメソッドでfollowed_idカラムから@userオブジェクトのidを検索。そのデータをRelationship(params)として渡す。

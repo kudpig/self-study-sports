@@ -1,0 +1,6 @@
+= link_to like_path(current_user.likes.find_by(post_id: post.id)), method: :delete, remote: true do
+  = icon 'fa', 'heart', class: 'fa-lg'
+
+/ like_areaにていいね済みの投稿である場合の表示。
+/ 色ぬりのハートが表示されていて、ボタンを押すといいねを外す(delete)という処理をリクエストする。
+/ 受け取っている変数postの中身を元にlike_pathを割り出す(likesの中からpost_idを持つlikeを探している)

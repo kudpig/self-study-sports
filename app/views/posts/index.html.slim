@@ -4,7 +4,12 @@
       / @postsに入っているデータ分、render以下の表示を繰り返す
       / pertialとcollectionを省略した記法
       / 部分テンプレート先には@posts→変数postとして代入される
-      = render @posts
+      / postの有無で分岐
+      - if @posts.present?
+        = render @posts
+      - else
+        .text-center.font-weight-bold
+          | 投稿がありません
       = paginate @posts
 
     / 画面右側はユーザー情報を載せる記述
@@ -12,25 +17,14 @@
       / ログインがtrueならば表示。logged_in?はsoceryのメソッド。
       - if logged_in?
         .profile-box.mb-3
-          = image_tag 'profile-placeholder.png', size: '50x50', class: 'rounded-circle mr-1'
-          = current_user.username
+          = image_tag current_user.avatar.url, size: '50x50', class: 'rounded-circle mr-1'
+          = link_to current_user.username, user_path(current_user)
 
       .users-box
         .card
           .card-header
             | ユーザー
           .card-body
-            .user.mb-3
-              = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle mr-1'
-              | ダミー京介
-            .user.mb-3
-              = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle mr-1'
-              | ダミー寅泰
-            .user.mb-3
-              = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle mr-1'
-              | ダミー常松
-            .user.mb-3
-              = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle mr-1'
-              | ダミーまこと
+            = render @users
           .card-footer
-            = link_to 'すべて見る', '#'
+            = link_to 'すべて見る', users_path

@@ -2,15 +2,15 @@
   .image-box
     .swiper-container
       .swiper-wrapper
-        - @post.images.each do |image|
-          .swiper-slide
-            = image_tag image.url
+        / - @post.images.each do |image|
+        .swiper-slide
+          = image_tag @post.image.url
       .swiper-pagination
 
   .image-info-box
     .profile-box.p-3
       .d-flex.align-items-center
-        = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle mr-1'
+        = image_tag @post.user.avatar.url, size: '40x40', class: 'rounded-circle mr-1'
         = @post.user.username
         / ログイン時かつ自身の投稿の場合は編集削除ができる分岐を導入する
         - if logged_in? && @post.user_id == current_user.id
@@ -20,12 +20,17 @@
             = link_to edit_post_path(@post) do
               = icon 'far', 'edit', class: 'fa-lg'
 
+        / ログイン時かつ自身の投稿でない場合は"いいね"ができる分岐を導入する
+        - if logged_in? && @post.user_id != current_user.id
+          .ml-auto
+            = render 'like_area', post: @post
+
     hr.m-0
     .post-body.p-3
       / 投稿の本文
       .row.no-gutters
         .col-2
-          = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle'
+          = image_tag @post.user.avatar.url, size: '40x40', class: 'rounded-circle'
         .col-10
           / railsのsimple_formatメソッドを使用し、入力時の改行等を反映できるようにする
           = simple_format(@post.body)

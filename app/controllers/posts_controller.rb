@@ -3,11 +3,19 @@ class PostsController < ApplicationController
   # require_loginメソッドにより、ログインしていないユーザは上記５つのアクションを実行できない
 
   def index
-    @posts = Post.all.includes(:user).order(created_at: :desc).page(params[:page])
     # includesがないとuser_idについてsqlが多量発行される（N+1問題の解消）
     # orderはrailsのActiveRecordメソッドのひとつ。()内記述で並び順を変更できる。descは降順
     # .page(params[:page])により現在のページパラメーターを受け取っている
     # kaminariのデフォルト設定により最初のページはparamsを無視する（config.params_on_first_page = false）
+    @posts = if current_user
+               # ログイン中であれば、ログインしているユーザーがフォローしている人の投稿のみ表示される分岐
+               current_user.feed.includes(:user).page(params[:page]).order(created_at: :desc)
+             # feedはuser.rbにて設定。フォロー済ユーザー+自分のPostを取り出すメソッド。
+             else
+               Post.all.includes(:user).page(params[:page]).order(created_at: :desc)
+               # 非ログイン時は全ての投稿を表示。
+             end
+    @users = User.recent(5)
   end
 
   def new
@@ -61,10 +69,15 @@ class PostsController < ApplicationController
     end
   end
 
+  def search
+    @posts = @search_form.search.includes(:user).page(params[:page])
+    # application_controllerで定義した@search_formについて検索をかける。
+    # includes(:user)はN+1問題対応。検索はPostについてだが、それに紐づくUserについてもSQLが発行されてしまう。
+  end
+
   private
 
   def post_params
-    params.require(:post).permit(:body, images: []).merge(user_id: current_user.id)
-    # images:[]とする事で、imagesを配列の形で扱うことができる
+    params.require(:post).permit(:body, :image).merge(user_id: current_user.id)
   end
 end

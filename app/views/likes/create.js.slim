@@ -1,0 +1,3 @@
+| $('#like_area-#{@post.id}').html("#{j render('posts/unlike', post: @post)}")
+/ create(いいね)が実行されたら、いいねを外すためのリンクに差し替える
+/ posts/_like_area の分岐を切り替えているイメージ
