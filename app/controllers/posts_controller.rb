@@ -78,7 +78,6 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:body, images: []).merge(user_id: current_user.id)
-    # images:[]とする事で、imagesを配列の形で扱うことができる
+    params.require(:post).permit(:body, :image).merge(user_id: current_user.id)
   end
 end
