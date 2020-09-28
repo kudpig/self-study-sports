@@ -180,3 +180,11 @@ img {
     text-align:center;
   }
 }
+
+
+.theme-img {
+  width: 300px;
+  height: 300px;
+  // 画像の縦横比を維持せずにboxのサイズにトリミングし表示
+  object-fit: cover;
+}
