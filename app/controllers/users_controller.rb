@@ -11,7 +11,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       auto_login(@user) # 新規登録された@userでそのままログインする
-      redirect_to login_path, success: 'ユーザーを作成しました'
+      redirect_to posts_path, success: 'ユーザーを作成しました'
     else
       flash.now[:danger] = 'ユーザーの作成に失敗しました'
       render :new

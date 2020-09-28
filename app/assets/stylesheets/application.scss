@@ -139,6 +139,10 @@ img {
 }
 
 // トップページ関連
+.top-font {
+  font-family: 'Lato', 'Noto Sans JP', 'ヒラギノ角ゴ ProN', 'Hiragino Kaku Gothic ProN', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif;
+}
+
 .background {
   background-image:  linear-gradient(90deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%),image-url("background.png");
   background-position: center center;
@@ -175,4 +179,12 @@ img {
     color: #FFFFFF;
     text-align:center;
   }
+}
+
+
+.theme-img {
+  width: 300px;
+  height: 300px;
+  // 画像の縦横比を維持せずにboxのサイズにトリミングし表示
+  object-fit: cover;
 }
