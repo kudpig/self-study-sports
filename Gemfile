@@ -78,5 +78,6 @@ gem 'font-awesome-sass'
 gem 'rails-i18n'
 gem 'carrierwave'
 gem 'kaminari'
+gem 'jquery-rails'
 
 gem 'rename'
