@@ -86,3 +86,4 @@ gem 'kaminari'
 gem 'jquery-rails'
 
 gem 'rename'
+gem 'fog-aws'
