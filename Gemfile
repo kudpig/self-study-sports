@@ -84,3 +84,4 @@ gem 'jquery-rails'
 
 gem 'rename'
 gem 'fog-aws'
+gem 'faker'
