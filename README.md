@@ -1,26 +1,23 @@
-<img width="1376" alt="スクリーンショット 2020-08-24 3 05 52" src="https://user-images.githubusercontent.com/62790209/90985497-48b7c380-e5b7-11ea-9daf-5a15da21f5b2.png">
+## Fripgarm
+本アプリケーションはWebアプリケーション開発の練習用となりますので、実運営はしておりません。
 
-# README
+## アプリ概要
+アクロバティックな画像を共有するアプリです。インスタグラムを模しています。
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+<img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/662505/3c5916ff-2567-cbfc-0c5c-70ec89ab39e2.png" width="500">
 
-Things you may want to cover:
 
-* Ruby version
 
-* System dependencies
+### 実装した機能
 
-* Configuration
+- ユーザー登録・ログイン機能
+- 投稿機能(画像・本文)<br>画像はJavaScriptを使用し、プレビューを非同期処理で即時表示
+- コメント機能<br>非同期処理
+- いいね機能<br>非同期処理
+- フォロー機能<br>非同期処理
+- 検索機能
 
-* Database creation
+## プレビュー
+[![Image from Gyazo](https://i.gyazo.com/eeab396771b31758bd83bf28cd3ce75e.gif)](https://gyazo.com/eeab396771b31758bd83bf28cd3ce75e)
 
-* Database initialization
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
